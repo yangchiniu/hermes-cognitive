@@ -1,0 +1,86 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "hermes-cognitive"
+version = "1.0.0"
+description = "Cognitive architecture core for AI agents — OODA, PolicyEngine, Memory, Event Sourcing"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.11"
+authors = [
+    {name = "yangchiniu", email = "yangchiniu@users.noreply.github.com"},
+]
+keywords = ["ai", "agent", "cognitive-architecture", "ooda", "memory", "event-sourcing"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+
+dependencies = [
+    "pyyaml>=6.0",
+    "numpy>=1.24.0",
+]
+
+[project.optional-dependencies]
+llm = [
+    "openai>=1.0.0",
+    "tiktoken>=0.5.0",
+]
+semantic = [
+    "sentence-transformers>=2.2.0",
+    "scikit-learn>=1.3.0",
+]
+full = [
+    "hermes-cognitive[llm,semantic]",
+]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "pytest-asyncio>=0.21",
+    "mypy>=1.5",
+    "ruff>=0.1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/yangchiniu/hermes-cognitive"
+Repository = "https://github.com/yangchiniu/hermes-cognitive"
+Issues = "https://github.com/yangchiniu/hermes-cognitive/issues"
+Documentation = "https://github.com/yangchiniu/hermes-cognitive/tree/main/docs"
+
+[project.scripts]
+hermes-cognitive = "hermes_cognitive.core.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["hermes_core*"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "A", "SIM"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]

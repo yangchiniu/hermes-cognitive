@@ -1,0 +1,82 @@
+# Hermes Core — Default Policy Configuration
+# ---------------------------------------------------------------------------
+# This file defines the safety and resource-limitation policies enforced
+# by the PolicyEngine.  It is loaded at startup and can be reloaded at
+# runtime via PolicyEngine.reload_config().
+#
+# Fields:
+#   version              — Config schema version (incremented on breaking changes)
+#   forbidden_actions    — Action types that are unconditionally denied
+#   limits               — Hard resource / concurrency ceilings
+#   default_risk_threshold — Maximum risk level permitted without confirmation
+#   require_confirmation — Conditions that always trigger a user prompt
+#   tool_specific        — Per-tool-type overrides and constraints
+# ---------------------------------------------------------------------------
+
+version: 1
+
+# ---------------------------------------------------------------------------
+# Forbidden actions — these are NEVER allowed, regardless of context.
+# ---------------------------------------------------------------------------
+forbidden_actions:
+  - captcha_bypass
+  - destructive_shell
+  - infinite_loop
+  - credential_harvest
+  - unauthorized_port_scan
+
+# ---------------------------------------------------------------------------
+# Resource and concurrency limits
+# ---------------------------------------------------------------------------
+limits:
+  max_runtime_minutes: 20
+  max_requests_per_domain: 30
+  max_parallel_browsers: 3
+  max_retry_per_step: 3
+  max_concurrent_tasks: 2
+  max_memory_percent: 85
+  max_disk_percent: 90
+
+# ---------------------------------------------------------------------------
+# Risk threshold — tools whose registered risk level is ABOVE this value
+# will require explicit user confirmation (or be denied, depending on
+# enforcement mode).  Valid values: none, low, medium, high.
+# ---------------------------------------------------------------------------
+default_risk_threshold: medium
+
+# ---------------------------------------------------------------------------
+# require_confirmation — always prompt the user before executing an action
+# matching any of these criteria.  Each entry is a dict with zero or more
+# of the following keys:
+#   risk   — the tool's registered risk level
+#   type   — the action type string
+#   domain — (optional) a domain glob pattern
+# ---------------------------------------------------------------------------
+require_confirmation:
+  - risk: high
+  - type: destructive_shell
+  - type: captcha_bypass
+
+# ---------------------------------------------------------------------------
+# Tool-specific rules — per-tool-type constraints that override or extend
+# the global checks.
+# ---------------------------------------------------------------------------
+tool_specific:
+  terminal_exec:
+    max_timeout: 300
+    blocked_commands:
+      - "rm -rf /"
+      - "mkfs"
+      - "dd if="
+
+  browser_interact:
+    max_pages: 10
+    block_domains:
+      - "*paypal*"
+      - "*bank*"
+
+  code_exec:
+    max_timeout: 600
+    blocked_modules:
+      - "subprocess"
+      - "os.system"

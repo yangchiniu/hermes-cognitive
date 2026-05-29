@@ -1,29 +1,84 @@
 # hermes-cognitive
 
-> Hermes Agent 的认知架构核心 — 为 AI Agent 提供自主决策、学习和适应能力
+> 让 AI Agent 学会自己思考
 
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Tests](https://img.shields.io/badge/tests-251/251-brightgreen.svg)](#testing)
 
-**hermes-cognitive** 是一个模块化的认知架构框架，为 AI Agent 提供完整的决策-执行-学习闭环。它实现了 OODA 决策循环、自适应策略引擎、多层记忆系统和事件溯源，使 Agent 具备自主推理、环境感知和持续进化的能力。
+---
 
-## ✨ 核心特性
+## 这是什么？
 
-| 模块 | 功能 | 状态 |
-|------|------|------|
-| 🧠 **OODA Loop** | 观察-判断-决策-行动决策循环 | ✅ 生产就绪 |
-| 📊 **PolicyEngine** | 可配置的安全策略和风险控制 | ✅ 生产就绪 |
-| 🔄 **DriftAnalyzer** | 行为漂移检测 → 策略自适应反馈闭环 | ✅ 生产就绪 |
-| 🗄️ **MemoryManager** | 五层记忆系统（语义/情景/程序/环境/索引） | ✅ 生产就绪 |
-| 📝 **EventSourcing** | 完整的操作历史记录和回放能力 | ✅ 生产就绪 |
-| 🎯 **Planner** | LLM 驱动的任务分解和执行计划 | ✅ 生产就绪 |
-| 📈 **Telemetry** | 实时遥测和健康监控 | ✅ 生产就绪 |
-| 🛡️ **ReflectionEngine** | 自我反思和策略优化 | ✅ 生产就绪 |
-| 🔧 **ToolRegistry** | 工具注册和能力发现 | ✅ 生产就绪 |
-| 🏃 **FieldRunner** | 端到端任务执行引擎 | ✅ 生产就绪 |
+hermes-cognitive 是一个给 AI Agent 用的"大脑"。
 
-## 🚀 快速开始
+你可以把它理解成：**一个让 AI 学会自己做决定、记住经验、越用越聪明的框架**。
+
+现在的 AI 助手大多是你问一句它答一句，没有真正的"思考"能力。hermes-cognitive 试图解决这个问题——它让 AI 能够：
+
+- 🔍 **观察**周围发生了什么
+- 🤔 **判断**当前情况意味着什么
+- 🎯 **决定**应该怎么做
+- 🚀 **行动**并从结果中学习
+
+就像人类的思考过程一样。
+
+## 为什么要做这个？
+
+我们发现，现有的 AI Agent 框架普遍存在几个问题：
+
+1. **不会记仇** — 被坑了一次，下次还会被同样的方式坑
+2. **不会反思** — 做错了就错了，不会总结经验教训
+3. **不会保护自己** — 让它删文件它就删，没有安全意识
+4. **不会规划** — 复杂任务直接硬做，不会拆分成小步骤
+
+hermes-cognitive 就是为了解决这些问题而生的。
+
+## 它是怎么工作的？
+
+想象一下你接到一个复杂任务时的思考过程：
+
+```
+"帮我分析一下量子计算领域的最新进展"
+
+你的大脑会这样处理：
+1. 观察 → 这是一个学术研究任务，需要查找文献
+2. 判断 → 我需要搜索论文、整理要点、形成报告
+3. 决定 → 先搜索最新论文，再按主题分类，最后写总结
+4. 行动 → 执行每一步，遇到问题及时调整
+5. 记住 → 这次的经验下次可以复用
+```
+
+hermes-cognitive 就是把这个过程自动化了：
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                                                         │
+│   用户请求  ──→  观察  ──→  判断  ──→  决定  ──→  行动  │
+│                    ↑                              │     │
+│                    │          学习反馈            │     │
+│                    └──────────────────────────────┘     │
+│                                                         │
+│   记忆系统 ←─────────────────────────────────────────── │
+│   (记住这次发生了什么，下次做得更好)                      │
+│                                                         │
+│   安全策略 (防止做危险的事情)                            │
+│                                                         │
+└─────────────────────────────────────────────────────────┘
+```
+
+## 核心能力
+
+| 能力 | 说明 | 通俗解释 |
+|------|------|----------|
+| 🧠 **思考循环** | OODA 决策引擎 | 像人一样观察→判断→决定→行动 |
+| 📚 **记忆系统** | 五层记忆架构 | 能记住事情，而且分得清轻重缓急 |
+| 🛡️ **安全防护** | 策略引擎 | 知道什么能做，什么不能做 |
+| 🔄 **自我反思** | 漂移检测 | 发现自己跑偏了会自动纠正 |
+| 📝 **经验积累** | 事件溯源 | 每次行动都记录下来，方便复盘 |
+| 🎯 **任务规划** | 智能分解 | 复杂任务拆成小步骤一步步做 |
+
+## 快速开始
 
 ### 安装
 
@@ -32,253 +87,107 @@
 git clone https://github.com/yangchiniu/hermes-cognitive.git
 cd hermes-cognitive
 
-# 运行安装脚本
+# 一键安装
 chmod +x scripts/install.sh
 ./scripts/install.sh
-
-# 或手动安装
-pip install -e .
 ```
 
-### 环境检查
-
-```bash
-python scripts/check_env.py
-```
-
-### 基本使用
+### 跑起来看看
 
 ```python
-from hermes_cognitive.core import (
-    core_initialize,
-    core_health_check,
-    get_kernel_singleton,
-    get_policy_engine,
-    get_memory_manager_singleton,
-)
+from hermes_core.core import core_initialize, get_policy_engine, get_memory_manager
 
-# 初始化核心系统
+# 初始化
 core_initialize()
 
-# 健康检查
-status = core_health_check()
-print(f"系统状态: {status}")
-
-# 获取内核实例
-kernel = get_kernel_singleton()
-
-# 获取策略引擎
+# 试试安全策略
 policy = get_policy_engine()
 result = policy.evaluate_action("terminal_exec", {"command": "ls -la"})
-print(f"策略评估: {result}")
+print(f"这个操作安全吗？{result}")
 
-# 获取记忆管理器
-memory = get_memory_manager_singleton()
-memory.store("key", "value", category="working")
-value = memory.retrieve("key")
-print(f"记忆检索: {value}")
+# 试试记忆功能
+memory = get_memory_manager()
+memory.store("第一次见面", "你好世界", category="working")
+print(memory.retrieve("第一次见面"))  # → "你好世界"
 ```
 
-## 🏗️ 架构概览
+### 运行测试
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                     Agent Kernel                            │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐   │
-│  │  OODA    │  │ Planner  │  │ Field    │  │ Goal     │   │
-│  │  Loop    │  │          │  │ Runner   │  │ Manager  │   │
-│  └────┬─────┘  └────┬─────┘  └────┬─────┘  └────┬─────┘   │
-│       │              │              │              │         │
-│  ┌────┴──────────────┴──────────────┴──────────────┴────┐   │
-│  │              Event Bus (事件总线)                     │   │
-│  └────┬──────────────┬──────────────┬──────────────┬────┘   │
-│       │              │              │              │         │
-│  ┌────┴─────┐  ┌─────┴────┐  ┌─────┴────┐  ┌─────┴────┐   │
-│  │ Policy   │  │ Memory   │  │ Drift    │  │ Telemetry│   │
-│  │ Engine   │  │ Manager  │  │ Analyzer │  │          │   │
-│  └──────────┘  └──────────┘  └──────────┘  └──────────┘   │
-│                                                             │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐   │
-│  │ World    │  │ Tool     │  │Reflection│  │ Recovery │   │
-│  │ Model    │  │ Registry │  │ Engine   │  │ Manager  │   │
-│  └──────────┘  └──────────┘  └──────────┘  └──────────┘   │
-└─────────────────────────────────────────────────────────────┘
+```bash
+python tests/test_all.py            # 基础测试
+python tests/test_integration.py    # 集成测试
+# ... 更多测试见 tests/ 目录
 ```
 
-### 核心模块说明
-
-| 模块 | 文件 | 职责 |
-|------|------|------|
-| **kernel.py** | AgentKernel | 中央协调器，初始化和管理所有子系统 |
-| **ooda_loop.py** | OODALoop | 观察-判断-决策-行动循环引擎 |
-| **planner.py** | Planner | LLM 驱动的任务分解和计划生成 |
-| **policy_engine.py** | PolicyEngine | 安全策略评估和风险控制 |
-| **memory_manager.py** | MemoryManager | 五层记忆系统的统一接口 |
-| **drift_analyzer.py** | DriftAnalyzer | 行为漂移检测和策略优化建议 |
-| **event_bus.py** | EventBus | 发布-订阅事件总线 |
-| **telemetry.py** | Telemetry | 性能指标收集和健康监控 |
-| **reflection_engine.py** | ReflectionEngine | 自我反思和策略优化 |
-| **tool_registry.py** | ToolRegistry | 工具注册和能力发现 |
-| **world_model.py** | WorldModel | 环境状态建模和预测 |
-| **state_manager.py** | StateManager | 系统状态持久化和恢复 |
-| **goal_manager.py** | GoalManager | 目标追踪和优先级管理 |
-| **watchdog.py** | Watchdog | 系统健康监控和自动恢复 |
-| **recovery_manager.py** | RecoveryManager | 故障恢复和回滚机制 |
-| **experience_manager.py** | ExperienceManager | 经验积累和学习 |
-| **semantic_retrieval.py** | SemanticRetrieval | 语义向量检索引擎 |
-
-## 📁 项目结构
+## 项目结构
 
 ```
 hermes-cognitive/
-├── LICENSE                    # MIT 许可证
-├── README.md                  # 本文件
-├── CHANGELOG.md               # 版本历史
-├── CONTRIBUTING.md            # 贡献指南
-├── pyproject.toml             # 项目元数据和构建配置
-├── requirements.txt           # Python 依赖
+├── src/hermes_core/          # 核心代码
+│   ├── core/                 # 27 个核心模块
+│   └── plugins/              # 插件系统
+├── tests/                    # 测试套件（251 个测试）
+├── docs/                     # 文档
+│   ├── architecture.md       # 架构详解（想深入了解的看这个）
+│   ├── quickstart.md         # 快速上手指南
+│   └── configuration.md      # 配置说明
+├── examples/                 # 示例代码
+│   ├── basic_usage.py        # 基础用法
+│   ├── custom_policy.py      # 自定义安全规则
+│   └── llm_integration.py    # 接入大语言模型
 ├── config/
-│   └── policy.yaml            # 默认策略配置
-├── scripts/
-│   ├── install.sh             # 一键安装脚本
-│   └── check_env.py           # 环境检查脚本
-├── docs/
-│   ├── architecture.md        # 架构设计文档
-│   ├── quickstart.md          # 快速开始指南
-│   └── configuration.md       # 配置指南
-├── examples/
-│   ├── basic_usage.py         # 基础使用示例
-│   ├── custom_policy.py       # 自定义策略示例
-│   └── llm_integration.py     # LLM 集成示例
-├── src/
-│   └── hermes_cognitive/
-│       ├── __init__.py
-│       ├── core/              # 核心模块（27个）
-│       └── plugins/           # 插件系统
-└── tests/
-    ├── test_all.py            # 单元测试 (64)
-    ├── test_integration.py    # 集成测试 (82)
-    ├── test_semantic_retrieval.py # 语义检索测试 (18)
-    ├── test_remaining.py      # 补充测试 (81)
-    ├── test_planner.py        # Planner 专项测试
-    ├── test_ooda.py           # OODA 专项测试
-    ├── test_event_bus.py      # EventBus 专项测试
-    ├── benchmarks/            # 性能基准测试
-    ├── chaos/                 # 混沌工程测试
-    ├── replay/                # 重放测试
-    └── stability/             # 稳定性测试
+│   └── policy.yaml           # 安全策略配置
+└── scripts/
+    ├── install.sh            # 安装脚本
+    └── check_env.py          # 环境检查
 ```
 
-## 🧪 测试
+## 它能用来做什么？
 
-```bash
-# 运行全部测试
-python tests/test_all.py           # 64 单元测试
-python tests/test_integration.py   # 82 集成测试
-python tests/test_semantic_retrieval.py  # 18 语义检索测试
-python tests/test_remaining.py     # 81 补充测试
+- **科研助手** — 帮你搜索论文、整理文献、生成报告
+- **自动化运维** — 监控系统、自动处理异常、记录操作日志
+- **智能客服** — 理解用户意图、记住历史对话、持续改进回答
+- **个人助理** — 管理任务、学习你的偏好、越用越顺手
 
-# 性能基准测试
-python tests/benchmarks/run_benchmark.py
+任何需要 AI "有脑子"的场景，都可以考虑用它。
 
-# 混沌工程测试
-python tests/chaos/run_chaos.py
+## 配置
 
-# 稳定性测试
-python tests/stability/run_stability.py
-```
-
-## ⚙️ 配置
-
-### 策略配置 (config/policy.yaml)
+安全策略在 `config/policy.yaml` 里配置：
 
 ```yaml
-version: 1
-
-# 禁止的操作类型
+# 哪些事情绝对不能做
 forbidden_actions:
-  - captcha_bypass
-  - destructive_shell
-  - infinite_loop
-  - credential_harvest
-  - unauthorized_port_scan
+  - captcha_bypass        # 不能破解验证码
+  - destructive_shell     # 不能执行破坏性命令
+  - credential_harvest    # 不能窃取密码
 
 # 资源限制
 limits:
-  max_runtime_minutes: 20
-  max_requests_per_domain: 30
-  max_parallel_browsers: 3
-  max_retry_per_step: 3
-  max_concurrent_tasks: 2
-  max_memory_percent: 85
-  max_disk_percent: 90
-
-# 风险阈值
-default_risk_threshold: medium
-
-# 需要确认的操作
-require_confirmation:
-  - risk: high
-  - type: destructive_shell
-
-# 工具特定规则
-tool_specific:
-  terminal_exec:
-    max_timeout: 300
-    blocked_commands:
-      - "rm -rf /"
-      - "mkfs"
-      - "dd if="
-  browser_interact:
-    max_pages: 10
-    block_domains:
-      - "*paypal*"
-      - "*bank*"
-  code_exec:
-    max_timeout: 600
-    blocked_modules:
-      - "subprocess"
-      - "os.system"
+  max_runtime_minutes: 20      # 单次任务最多跑 20 分钟
+  max_concurrent_tasks: 2      # 最多同时跑 2 个任务
 ```
 
-完整配置文档请参阅 [docs/configuration.md](docs/configuration.md)。
+更多配置项见 [docs/configuration.md](docs/configuration.md)。
 
-## 🔌 插件系统
+## 技术指标
 
-hermes-cognitive 支持通过插件扩展功能：
+| 指标 | 数值 |
+|------|------|
+| 核心模块 | 27 个 |
+| 测试用例 | 251 个（100% 通过） |
+| 类型注解覆盖 | 96.7% |
+| 内存占用 | ~30MB |
+| 单次 Hook 延迟 | ~13ms |
 
-```yaml
-# plugin.yaml
-name: my-plugin
-version: 1.0.0
-description: "自定义插件"
-hooks:
-  - on_session_start
-  - pre_tool_call
-  - post_tool_call
-commands:
-  - /my-command
-```
+## 贡献
 
-## 📊 性能指标
+欢迎！不管是提 bug、写文档还是加功能，都请看 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
-| 指标 | 值 | 说明 |
-|------|-----|------|
-| 测试通过率 | 251/251 (100%) | 全部测试通过 |
-| 模块覆盖 | 27/27 (100%) | 所有模块已激活 |
-| 类型注解覆盖 | 96.7% | 高类型安全 |
-| 代码质量评分 | 8.82/10 | 高质量代码 |
-| Hook 延迟 | ~13.5ms | 低开销 |
-| 内存占用 | ~30MB | 轻量级 |
+## 许可证
 
-## 🤝 贡献
+MIT — 随便用，记得保留版权声明就行。
 
-欢迎贡献！请阅读 [CONTRIBUTING.md](CONTRIBUTING.md) 了解详情。
+## 相关项目
 
-## 📄 许可证
-
-本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE)
-
-## 🔗 相关项目
-
-- [hermes-research-station](https://github.com/yangchiniu/hermes-research-station) - 面向理工科研究生的科研工作站
+- [hermes-research-station](https://github.com/yangchiniu/hermes-research-station) — 面向理工科研究生的科研工作站
